@@ -12,3 +12,8 @@ Revision history for Perl extension Number::Range.
 	- Allowed inrange() to take a list of tests, and return a
 	  list of true/false if in array context, or single true
 	  if all are true, or a false if one of them is false.
+
+0.04  Tue Mar 23, 2004
+  - Created range() to output either a list of all numbers
+    in the range, or to output a range format, depending
+    on list context.

@@ -10,7 +10,7 @@ require Exporter;
 our @ISA = qw(Exporter);
 
 
-our $VERSION = '0.03';
+our $VERSION = '0.04';
 
 sub new {
   my $this = shift;
@@ -135,6 +135,32 @@ sub delrange {
   my $self = shift;
   $self->initialize("del", @_);
 }
+
+sub range {
+  my $self = shift;
+  if (wantarray) {
+    my @range = keys(%{$self->{_rangehash}});
+    my @sorted = sort {$a <=> $b} @range;
+    return @sorted;
+  }
+  else {
+    my @range    = $self->range;
+    my $previous = shift @range;
+    my $format   = "$previous..$previous";
+    foreach my $current (@range) {
+      if ($current == ($previous + 1)) {
+        $format =~ s/\.\.$previous$//;
+        $format .= "..$current"; 
+      }
+      else {
+        $format .= ",$current";
+      }
+      $previous = $current;
+    }
+    return $format;
+  }
+}
+
 1;
 __END__
 
@@ -187,6 +213,12 @@ This will take one or more numbers and check if each of them exists in the range
 If passed a list, and in array context, it will return a list of C<0>'s or C<1>'s,
 depending if that one was true or false in the list position. If in scalar context,
 it will return a single C<1> if all are true, or a single C<0> if one of them failed.
+
+=item $format = $range->range; @numbers = $range->range;
+
+This will output either a list of all the numbers in the range, if in 
+list context, or it will output a range format suitable to be used 
+again for a new range.
 
 =head2 EXPORT
 

@@ -1,4 +1,4 @@
-use Test::More tests => 21;
+use Test::More tests => 22;
 BEGIN { use_ok('Number::Range') };
 
 ok($range = Number::Range->new("10..100"));
@@ -28,3 +28,7 @@ ok($range->inrange(10,25));
 @test = $range->inrange(10,25,1000);
 @rc   = qw/1 1 0/;
 is_deeply(\@rc, \@test);
+$range = Number::Range->new("1..100,150..200");
+$rangeformat = $range->range;
+cmp_ok("1..100,150..200", 'eq', $rangeformat);
+
