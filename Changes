@@ -22,3 +22,7 @@ Revision history for Perl extension Number::Range.
 	- Cleaned up POD and documentation.
 	- Created the size() method to return number of elements
 		in the range.
+
+0.06 Wed July 21, 2004
+	- Cleaned up POD
+	- Added a SEE ALSO for Number::Tollerant 

@@ -10,7 +10,7 @@ require Exporter;
 our @ISA = qw(Exporter);
 
 
-our $VERSION = '0.05';
+our $VERSION = '0.06';
 
 sub new {
   my $this = shift;
@@ -210,28 +210,28 @@ operator in list context.
 
 =item new
 
-C<$range = Number::Range->new("10..20","25..30");>
+  $range = Number::Range->new("10..20","25..30");
 
 Creates the range object. It will accept any number of ranges as its 
 input.
 
 =item addrange
 
-C<$range->addrange("22");>
+  $range->addrange("22");
 
 This will also take any number of ranges as input and add them to the 
 existing range.
 
 =item delrange
 
-C<$range->delrange("10");>
+  $range->delrange("10");
 
 This will also take any number of ranges as input and delete them from 
 the existing range.
 
 =item inrange
 
-C<$range->inrange("26"); my @results = $range->inrange("27","200");>
+  $range->inrange("26"); my @results = $range->inrange("27","200");
 
 This will take one or more numbers and check if each of them exists in 
 the range. If passed a list, and in array context, it will return a 
@@ -241,7 +241,7 @@ if all are true, or a single C<0> if one of them failed.
 
 =item range
 
-C<$format = $range->range; @numbers = $range->range;>
+  $format = $range->range; @numbers = $range->range;
 
 Depending on context this will return either an array of all the 
 numbers found in the range, for list context. For scalar context it 
@@ -249,7 +249,7 @@ will return a range string.
 
 =item size
 
-C<$size = $range->size;>
+  $size = $range->size;
 
 This will return the total number of entries in the range.
 
@@ -258,6 +258,10 @@ This will return the total number of entries in the range.
 =head2 EXPORT
 
 None by default.
+
+=head1 SEE ALSO
+
+C<Number::Tolerant>
 
 =head1 AUTHOR
 
