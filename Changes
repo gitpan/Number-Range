@@ -7,3 +7,8 @@ Revision history for Perl extension Number::Range.
 0.02  Sat Mar 20 2004
   - Added the ability to add and delete ranges from existing
     range.
+
+0.03  Mon Mar 22, 2004
+	- Allowed inrange() to take a list of tests, and return a
+	  list of true/false if in array context, or single true
+	  if all are true, or a false if one of them is false.

@@ -1,4 +1,4 @@
-use Test::More tests => 19;
+use Test::More tests => 21;
 BEGIN { use_ok('Number::Range') };
 
 ok($range = Number::Range->new("10..100"));
@@ -24,3 +24,7 @@ $range->delrange("-10..0");
 ok($range->inrange(-10) == 0);
 ok($range->inrange(10)  == 1);
 ok($range->inrange(25) == 1);
+ok($range->inrange(10,25));
+@test = $range->inrange(10,25,1000);
+@rc   = qw/1 1 0/;
+is_deeply(\@rc, \@test);

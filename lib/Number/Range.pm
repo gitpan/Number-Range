@@ -10,7 +10,7 @@ require Exporter;
 our @ISA = qw(Exporter);
 
 
-our $VERSION = '0.02';
+our $VERSION = '0.03';
 
 sub new {
   my $this = shift;
@@ -106,8 +106,24 @@ sub _delnumbers {
 
 sub inrange {
   my $self   = shift;
-  my $number = shift;
-  return (exists($self->{_rangehash}{$number})) ? 1 : 0;
+  if (scalar(@_) == 1) {
+    return (exists($self->{_rangehash}{$_[0]})) ? 1 : 0;
+  } else {
+    if (wantarray) {
+      my @returncodes;
+      foreach my $test (@_) {
+        push(@returncodes, ($self->inrange($test)) ? 1 : 0);
+      }
+      return @returncodes;
+    } else {
+      foreach my $test (@_) {
+        if (!$self->inrange($test)) {
+          return 0;
+        }
+        return 1;
+      }
+    }
+  }
 }
 
 sub addrange {
@@ -165,9 +181,12 @@ This will also take any number of ranges as input and add them to the existing r
 
 This will also take any number of ranges as input and delete them from the existing range.
 
-=item $range->inrange("26");
+=item $range->inrange("26"); my @results = $range->inrange("27","200");
 
-This will take one number and check if it exists in the range and return C<1> for true and C<0> for false.
+This will take one or more numbers and check if each of them exists in the range.
+If passed a list, and in array context, it will return a list of C<0>'s or C<1>'s,
+depending if that one was true or false in the list position. If in scalar context,
+it will return a single C<1> if all are true, or a single C<0> if one of them failed.
 
 =head2 EXPORT
 
