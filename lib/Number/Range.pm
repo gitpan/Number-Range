@@ -10,7 +10,7 @@ require Exporter;
 our @ISA = qw(Exporter);
 
 
-our $VERSION = '0.04';
+our $VERSION = '0.05';
 
 sub new {
   my $this = shift;
@@ -161,13 +161,20 @@ sub range {
   }
 }
 
+sub size {
+  my $self = shift;
+  my @temp = $self->range;
+  return scalar(@temp);
+}
+
 1;
 __END__
 
 =head1 NAME
 
-Number::Range - Perl extension defining ranges of numbers and testing
-later if a number is in it
+Number::Range - Perl extension defining ranges of numbers and testing 
+if a number is found in the range. You can also add and delete from 
+this range.
 
 =head1 SYNOPSIS
 
@@ -181,44 +188,72 @@ later if a number is in it
   }
   $range->addrange("200..300");
   $range->delrange("250..255");
+  my $format = $range->range;
+  # $format will be '-10..10,12,100..120,200..249,256..300'
 
 =head1 DESCRIPTION
 
-Number::Range will take a description of range(s), and then allow you to
-test later on if a number falls within the range(s).
+Number::Range will take a description of a range, and then allow you 
+to test on if a number falls within the range. You can also add and 
+delete from the range.
 
 =head2 RANGE FORMAT
 
-The format used for range is pretty straight forward. To separate sections
-of ranges it uses a C<,> or whitespace. To create the range, it uses C<..> to
-do this, much like Perl's own binary C<..> range operator in list context.
+The format used for range is pretty straight forward. To separate 
+sections of ranges it uses a C<,> or whitespace. To create the range, 
+it uses C<..> to do this, much like Perl's own binary C<..> range 
+operator in list context.
 
 =head2 METHODS
 
-=item $range = Number::Range->new("10..20","25..30");
+=over
 
-Creates the range object. It will accept any number of ranges as its input.
+=item new
 
-=item $range->addrange("22");
+C<$range = Number::Range->new("10..20","25..30");>
 
-This will also take any number of ranges as input and add them to the existing range.
+Creates the range object. It will accept any number of ranges as its 
+input.
 
-=item $range->delrange("10");
+=item addrange
 
-This will also take any number of ranges as input and delete them from the existing range.
+C<$range->addrange("22");>
 
-=item $range->inrange("26"); my @results = $range->inrange("27","200");
+This will also take any number of ranges as input and add them to the 
+existing range.
 
-This will take one or more numbers and check if each of them exists in the range.
-If passed a list, and in array context, it will return a list of C<0>'s or C<1>'s,
-depending if that one was true or false in the list position. If in scalar context,
-it will return a single C<1> if all are true, or a single C<0> if one of them failed.
+=item delrange
 
-=item $format = $range->range; @numbers = $range->range;
+C<$range->delrange("10");>
 
-This will output either a list of all the numbers in the range, if in 
-list context, or it will output a range format suitable to be used 
-again for a new range.
+This will also take any number of ranges as input and delete them from 
+the existing range.
+
+=item inrange
+
+C<$range->inrange("26"); my @results = $range->inrange("27","200");>
+
+This will take one or more numbers and check if each of them exists in 
+the range. If passed a list, and in array context, it will return a 
+list of C<0>'s or C<1>'s, depending if that one was true or false in 
+the list position. If in scalar context, it will return a single C<1> 
+if all are true, or a single C<0> if one of them failed.
+
+=item range
+
+C<$format = $range->range; @numbers = $range->range;>
+
+Depending on context this will return either an array of all the 
+numbers found in the range, for list context. For scalar context it 
+will return a range string.
+
+=item size
+
+C<$size = $range->size;>
+
+This will return the total number of entries in the range.
+
+=back
 
 =head2 EXPORT
 
@@ -232,7 +267,7 @@ Larry Shatzer, Jr., E<lt>larrysh@cpan.orgE<gt>
 
 Copyright (C) 2004 by Larry Shatzer, Jr.
 
-This library is free software; you can redistribute it and/or modify
+This library is free software; you can redistribute it and/or modify 
 it under the same terms as Perl itself.
 
 =cut

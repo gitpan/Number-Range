@@ -1,8 +1,8 @@
-Number-Range version 0.02
+Number-Range version 0.05
 =========================
 
 Number::Range is an object-oriented interface to test if a number exists
-in a given range.
+in a given range, and to be able to manipulate the range.
 
 INSTALLATION
 
