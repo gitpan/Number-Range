@@ -1,8 +1,8 @@
-Number-Range version 0.01
+Number-Range version 0.02
 =========================
 
-Number::Range will take a description of range(s), and then allow you to
-test later on if a number falls within the range(s).
+Number::Range is an object-oriented interface to test if a number exists
+in a given range.
 
 INSTALLATION
 
@@ -19,7 +19,7 @@ Nothing that is outside of the core Perl modules.
 
 COPYRIGHT AND LICENCE
 
-Put the correct copyright and licence information here.
+Put the correct copyright and license information here.
 
 Copyright (C) 2004 by Larry Shatzer, Jr.
 

@@ -3,3 +3,7 @@ Revision history for Perl extension Number::Range.
 0.01  Fri Mar 19 12:02:36 2004
 	- original version; created by h2xs 1.23 with options
 		-AX -n Number::Range
+
+0.02  Sat Mar 20 2004
+  - Added the ability to add and delete ranges from existing
+    range.
