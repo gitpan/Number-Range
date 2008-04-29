@@ -10,7 +10,7 @@ require Exporter;
 our @ISA = qw(Exporter);
 
 
-our $VERSION = '0.06';
+our $VERSION = '0.07';
 
 sub new {
   my $this = shift;
@@ -146,7 +146,7 @@ sub range {
   else {
     my @range    = $self->range;
     my $previous = shift @range;
-    my $format   = "$previous..$previous";
+    my $format   = "$previous";
     foreach my $current (@range) {
       if ($current == ($previous + 1)) {
         $format =~ s/\.\.$previous$//;
@@ -172,9 +172,8 @@ __END__
 
 =head1 NAME
 
-Number::Range - Perl extension defining ranges of numbers and testing 
-if a number is found in the range. You can also add and delete from 
-this range.
+Number::Range - Perl extension defining ranges of numbers and testing if a
+number is found in the range. You can also add and delete from this range.
 
 =head1 SYNOPSIS
 
@@ -193,16 +192,14 @@ this range.
 
 =head1 DESCRIPTION
 
-Number::Range will take a description of a range, and then allow you 
-to test on if a number falls within the range. You can also add and 
-delete from the range.
+Number::Range will take a description of a range, and then allow you to test on
+if a number falls within the range. You can also add and delete from the range.
 
 =head2 RANGE FORMAT
 
-The format used for range is pretty straight forward. To separate 
-sections of ranges it uses a C<,> or whitespace. To create the range, 
-it uses C<..> to do this, much like Perl's own binary C<..> range 
-operator in list context.
+The format used for range is pretty straight forward. To separate sections of
+ranges it uses a C<,> or whitespace. To create the range, it uses C<..> to do
+this, much like Perl's own binary C<..> range operator in list context.
 
 =head2 METHODS
 
@@ -226,26 +223,26 @@ existing range.
 
   $range->delrange("10");
 
-This will also take any number of ranges as input and delete them from 
-the existing range.
+This will also take any number of ranges as input and delete them from the
+existing range.
 
 =item inrange
 
   $range->inrange("26"); my @results = $range->inrange("27","200");
 
-This will take one or more numbers and check if each of them exists in 
-the range. If passed a list, and in array context, it will return a 
-list of C<0>'s or C<1>'s, depending if that one was true or false in 
-the list position. If in scalar context, it will return a single C<1> 
-if all are true, or a single C<0> if one of them failed.
+This will take one or more numbers and check if each of them exists in the
+range. If passed a list, and in array context, it will return a list of C<0>'s
+or C<1>'s, depending if that one was true or false in the list position. If in
+scalar context, it will return a single C<1> if all are true, or a single C<0>
+if one of them failed.
 
 =item range
 
   $format = $range->range; @numbers = $range->range;
 
-Depending on context this will return either an array of all the 
-numbers found in the range, for list context. For scalar context it 
-will return a range string.
+Depending on context this will return either an array of all the numbers found
+in the range, for list context. For scalar context it will return a range
+string.
 
 =item size
 
@@ -261,7 +258,8 @@ None by default.
 
 =head1 SEE ALSO
 
-C<Number::Tolerant>
+L<Number::Tolerant>, L<Tie::RangeHash>, and L<Array::IntSpan> for similar
+modules.
 
 =head1 AUTHOR
 
@@ -269,9 +267,9 @@ Larry Shatzer, Jr., E<lt>larrysh@cpan.orgE<gt>
 
 =head1 COPYRIGHT AND LICENSE
 
-Copyright (C) 2004 by Larry Shatzer, Jr.
+Copyright (C) 2004-8 by Larry Shatzer, Jr.
 
-This library is free software; you can redistribute it and/or modify 
-it under the same terms as Perl itself.
+This library is free software; you can redistribute it and/or modify it under
+the same terms as Perl itself.
 
 =cut

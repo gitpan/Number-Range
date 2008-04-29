@@ -1,8 +1,8 @@
 Number-Range version 0.06
 =========================
 
-Number::Range is an object-oriented interface to test if a number exists
-in a given range, and to be able to manipulate the range.
+Number::Range is an object-oriented interface to test if a number exists in a
+given range, and to be able to manipulate the range.
 
 INSTALLATION
 
@@ -19,10 +19,8 @@ Nothing that is outside of the core Perl modules.
 
 COPYRIGHT AND LICENCE
 
-Put the correct copyright and license information here.
-
 Copyright (C) 2004 by Larry Shatzer, Jr.
 
-This library is free software; you can redistribute it and/or modify
-it under the same terms as Perl itself.
+This library is free software; you can redistribute it and/or modify it under
+the same terms as Perl itself.
 
