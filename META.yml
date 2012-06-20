@@ -1,6 +1,6 @@
 --- #YAML:1.0
 name:               Number-Range
-version:            0.09
+version:            0.10
 abstract:           Perl extension defining ranges of numbers and testing if a
 author:
     - Larry Shatzer, Jr. <larrysh@cpan.org>
