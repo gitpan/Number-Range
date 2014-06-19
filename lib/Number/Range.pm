@@ -11,7 +11,7 @@ require Exporter;
 our @ISA = qw(Exporter);
 
 
-our $VERSION = '0.11';
+our $VERSION = '0.12';
 
 sub new {
   my $this = shift;
@@ -248,21 +248,25 @@ sub rangeList {
   # Get the range as an array (excluding large ones)
   my @range = $self->range(1);
 
-  # Get the first element in the array range
-  my $previous = shift(@range);
-  my @sub = ($previous);
+  # If we have any ranges
+  if (@range) {
 
-  # Process ranges stored as arrays
-  foreach my $current (@range) {
-      if ($current == ($previous + 1)) {
-          $sub[1] = $current;
-      } else {
-          push(@return,[@sub]);
-          @sub = ($current);
-      }
-      $previous = $current;
+    # Get the first element in the array range
+    my $previous = shift(@range);
+    my @sub = ($previous);
+
+    # Process ranges stored as arrays
+    foreach my $current (@range) {
+        if ($current == ($previous + 1)) {
+            $sub[1] = $current;
+        } else {
+            push(@return,[@sub]);
+            @sub = ($current);
+        }
+        $previous = $current;
+    }
+    push(@return,[@sub]);
   }
-  push(@return,[@sub]);
 
   # Process ranges stored as large range hash entries
   if($self->{_largeRangehash}) {
@@ -389,7 +393,7 @@ Larry Shatzer, Jr., E<lt>larrysh@cpan.orgE<gt>
 
 =head1 COPYRIGHT AND LICENSE
 
-Copyright (C) 2004-12 by Larry Shatzer, Jr.
+Copyright (C) 2004-14 by Larry Shatzer, Jr.
 
 This library is free software; you can redistribute it and/or modify it under
 the same terms as Perl itself.
